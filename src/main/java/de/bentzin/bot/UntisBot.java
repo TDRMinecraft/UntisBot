@@ -2,6 +2,7 @@ package de.bentzin.bot;
 
 import com.beust.jcommander.internal.Nullable;
 import de.bentzin.bot.command.CommandSystem;
+import de.bentzin.bot.command.vp.VPTask;
 import de.bentzin.bot.permission.PermissionManager;
 import it.auties.whatsapp4j.manager.WhatsappDataManager;
 import it.auties.whatsapp4j.protobuf.chat.Chat;
@@ -17,6 +18,56 @@ import java.util.logging.Logger;
 
 public final class UntisBot {
 
+    /**
+     * The constant AUTORESTART.
+     */
+    public static final boolean AUTORESTART = true;
+    private static final WhatsappAPI api = new WhatsappAPI();
+    private static final WhatsappDataManager manager = api.manager();
+    private static final CommandSystem commandSystem = new CommandSystem();
+    private static final PermissionManager permissionManager = new PermissionManager();
+    /**
+     * The constant dateFormatter.
+     */
+    protected static DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    /**
+     * The Date.
+     */
+    static Date date;
+    @Nullable
+    private static Chat chat = null;
+    private static final Runnable runnable = () -> {
+        while (true) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(new SimpleDateFormat().format(new Date(System.currentTimeMillis())));
+        }
+    };
+    private static final Runnable shutdownhook = () -> {
+        UntisBot.getApi().disconnect();
+        Logger.getGlobal().warning("Bot is going offline!");
+    };
+
+    static {
+        try {
+            date = dateFormatter.parse("2022-12-17 09:57:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String command;
+    /**
+     * Instantiates a new Bot.
+     *
+     * @throws ParseException the parse exception
+     */
+    public UntisBot() throws ParseException {
+    }
+
     private static void init(boolean debugmode) {
 
     }
@@ -27,48 +78,6 @@ public final class UntisBot {
 
     private static void terminate() {
 
-    }
-
-
-
-
-    /**
-     * The constant dateFormatter.
-     */
-    protected static DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    /**
-     * The Date.
-     */
-    static Date date;
-
-    static {
-        try {
-            date = dateFormatter .parse("2022-12-17 09:57:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * The constant AUTORESTART.
-     */
-    public static final boolean AUTORESTART = true;
-    private static final WhatsappAPI api = new WhatsappAPI();
-    private static final WhatsappDataManager manager = api.manager();
-
-    private static final CommandSystem commandSystem = new CommandSystem();
-    private static final PermissionManager permissionManager = new PermissionManager();
-    @Nullable
-    private static Chat chat = null;
-    private String command;
-
-    /**
-     * Instantiates a new Bot.
-     *
-     * @throws ParseException the parse exception
-     */
-    public UntisBot() throws ParseException {
     }
 
     /**
@@ -136,10 +145,10 @@ public final class UntisBot {
         registerEvents(api);
         getApi().connect();
         Runtime.getRuntime().addShutdownHook(new Thread(shutdownhook));
-       //TODO: CommandSystem.registerAll();
+        CommandSystem.registerAll();
 
         Timer timer = new Timer("VP-Timer");
-        //TODO: timer.schedule(VPTask.getInstance(), date);
+        timer.schedule(VPTask.getInstance(), date);
 
         Thread thread = new Thread(runnable);
         //thread.start();
@@ -215,7 +224,7 @@ public final class UntisBot {
                         System.out.println("System" + "@" + chat1.get().displayName() + ": " + input);
                     }
                 } else {
-                  //TODO:  Bot.getCommandsystem().handleInput(input);
+                    UntisBot.getCommandsystem().handleInput(input);
                 }
 
             }
@@ -227,11 +236,11 @@ public final class UntisBot {
     private static void printChat(Chat chat) {
         System.out.println("-----------------------<" + chat.displayName() + ">-----------------------");
         chat.messages().forEach(messageInfo -> {
-            //TODO   if (messageInfo.key().fromMe())
-           //TODO     System.out.println("[" + getDayTime(messageInfo.timestamp()) + "] " + "System " + ": " + Listener.readOut(messageInfo));
-            //TODO  else {
-            //TODO       System.out.println("[" + getDayTime(messageInfo.timestamp()) + "] " + messageInfo.sender().get().bestName().get() + ": " + Listener.readOut(messageInfo));
-            //TODO    }
+            if (messageInfo.key().fromMe())
+                System.out.println("[" + getDayTime(messageInfo.timestamp()) + "] " + "System " + ": " + Listener.readOut(messageInfo));
+            else {
+                System.out.println("[" + getDayTime(messageInfo.timestamp()) + "] " + messageInfo.sender().get().bestName().get() + ": " + Listener.readOut(messageInfo));
+            }
         });
         System.out.println("-----------------------" + chat.displayName() + "-----------------------");
     }
@@ -243,7 +252,7 @@ public final class UntisBot {
      */
     public static void registerEvents(WhatsappAPI api) {
 
-      //TODO:  api.registerListener(new Listener());
+        api.registerListener(new Listener());
     }
 
     /**
@@ -289,23 +298,6 @@ public final class UntisBot {
         Date date = new Date(milis);
         return formatter.format(date);
     }
-
-
-    private static Runnable runnable = () -> {
-        while (true) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(new SimpleDateFormat().format(new Date(System.currentTimeMillis())));
-        }
-    };
-
-    private static Runnable shutdownhook = () -> {
-       //TODO: Bot.getApi().disconnect();
-        Logger.getGlobal().warning("Bot is going offline!");
-    };
 
 
 }
