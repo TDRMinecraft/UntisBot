@@ -1,6 +1,6 @@
 package de.bentzin.bot.command.commands;
 
-import de.bentzin.facharbeit.bot.command.Command;
+import de.bentzin.bot.command.Command;
 import it.auties.whatsapp4j.protobuf.chat.Chat;
 import it.auties.whatsapp4j.protobuf.contact.Contact;
 import it.auties.whatsapp4j.protobuf.info.MessageInfo;
