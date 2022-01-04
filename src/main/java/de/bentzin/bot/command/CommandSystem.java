@@ -6,12 +6,6 @@ import de.bentzin.bot.command.commands.HelpCommand;
 import de.bentzin.bot.command.commands.InfoCommand;
 import de.bentzin.bot.command.commands.SayCommand;
 import de.bentzin.bot.command.commands.TestCommand;
-import de.bentzin.facharbeit.bot.Bot;
-import de.bentzin.facharbeit.bot.MyContact;
-import de.bentzin.facharbeit.bot.command.commands.HelpCommand;
-import de.bentzin.facharbeit.bot.command.commands.InfoCommand;
-import de.bentzin.facharbeit.bot.command.commands.SayCommand;
-import de.bentzin.facharbeit.bot.command.commands.TestCommand;
 import it.auties.whatsapp4j.protobuf.info.MessageInfo;
 import it.auties.whatsapp4j.protobuf.message.standard.TextMessage;
 
