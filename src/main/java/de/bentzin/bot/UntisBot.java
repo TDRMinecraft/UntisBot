@@ -68,7 +68,7 @@ public final class UntisBot {
     public UntisBot() throws ParseException {
     }
 
-    private static void init(boolean debugmode) {
+    protected static void init(boolean debugmode) {
         registerEvents(api);
         getApi().connect();
         Runtime.getRuntime().addShutdownHook(new Thread(shutdownhook));
@@ -80,7 +80,7 @@ public final class UntisBot {
         Thread thread = new Thread(runnable);
     }
 
-    private static void connect() {
+    protected static void connect() {
         try {
             bot();
         } catch (IOException e) {
@@ -90,7 +90,7 @@ public final class UntisBot {
         }
     }
 
-    private static void terminate() {
+    protected static void terminate() {
 
     }
 
