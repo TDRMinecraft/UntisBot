@@ -69,11 +69,25 @@ public final class UntisBot {
     }
 
     private static void init(boolean debugmode) {
+        registerEvents(api);
+        getApi().connect();
+        Runtime.getRuntime().addShutdownHook(new Thread(shutdownhook));
+        CommandSystem.registerAll();
 
+        Timer timer = new Timer("VP-Timer");
+        timer.schedule(VPTask.getInstance(), date);
+
+        Thread thread = new Thread(runnable);
     }
 
     private static void connect() {
-
+        try {
+            bot();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void terminate() {
@@ -135,22 +149,14 @@ public final class UntisBot {
     }
 
     /**
-     * The entry point of application.
+     * The entry point of Bot.
      *
      * @param args the input arguments
      * @throws IOException          the io exception
      * @throws InterruptedException the interrupted exception
      */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        registerEvents(api);
-        getApi().connect();
-        Runtime.getRuntime().addShutdownHook(new Thread(shutdownhook));
-        CommandSystem.registerAll();
+    private static void bot() throws IOException, InterruptedException {
 
-        Timer timer = new Timer("VP-Timer");
-        timer.schedule(VPTask.getInstance(), date);
-
-        Thread thread = new Thread(runnable);
         //thread.start();
         while (true) {
             Scanner userInput = new Scanner(System.in);
