@@ -2,7 +2,7 @@ package de.bentzin.bot.permission;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.Phonenumber;
-import de.bentzin.facharbeit.bot.MyContact;
+import de.bentzin.bot.MyContact;
 import it.auties.whatsapp4j.protobuf.contact.Contact;
 
 import java.util.HashMap;
