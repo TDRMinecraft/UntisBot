@@ -1,11 +1,11 @@
 package de.bentzin.bot.command.commands;
 
-import de.bentzin.facharbeit.bot.Bot;
-import de.bentzin.facharbeit.bot.command.Command;
-import de.bentzin.facharbeit.bot.command.CommandSystem;
-import de.bentzin.facharbeit.bot.command.Target;
-import de.bentzin.facharbeit.bot.message.MessageGenerator;
-import de.bentzin.facharbeit.bot.permission.Role;
+import de.bentzin.bot.UntisBot;
+import de.bentzin.bot.command.Command;
+import de.bentzin.bot.command.CommandSystem;
+import de.bentzin.bot.command.Target;
+import de.bentzin.bot.message.MessageGenerator;
+import de.bentzin.bot.permission.Role;
 import it.auties.whatsapp4j.protobuf.chat.Chat;
 import it.auties.whatsapp4j.protobuf.contact.Contact;
 import it.auties.whatsapp4j.protobuf.info.MessageInfo;
@@ -36,9 +36,9 @@ public class HelpCommand extends Command {
             if (label.key().fromMe()) {
                 role = Role.ADMIN;
             } else {
-                role = Bot.getPermissionManager().getRole(sender.get());
+                role = UntisBot.getPermissionManager().getRole(sender.get());
             }
-            Bot.getApi().sendMessage(chat,
+            UntisBot.getApi().sendMessage(chat,
                     MessageGenerator.generateBotTextMessage(genHelp(role),
                             "This instance is running on a pre-alpha version! : Version: 0.00!"
                     ));
@@ -55,7 +55,7 @@ public class HelpCommand extends Command {
     public String genHelp(Role role) {
         StringBuilder builder = new StringBuilder();
         builder.append("Commands:" + "\n");
-        for (Command command : Bot.getCommandsystem().cloneCommandSet()) {
+        for (Command command : UntisBot.getCommandsystem().cloneCommandSet()) {
             builder.append(command.getKey() + " | " + command.getPermissionLevel().name() + "\n");
         }
         builder.append("current prefix: '" + CommandSystem.INITIATOR + "'\n");
