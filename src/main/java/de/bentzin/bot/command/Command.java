@@ -1,5 +1,7 @@
 package de.bentzin.bot.command;
 
+import de.bentzin.bot.MyContact;
+import de.bentzin.bot.UntisBot;
 import de.bentzin.bot.permission.Role;
 import de.bentzin.facharbeit.bot.Bot;
 import de.bentzin.facharbeit.bot.MyContact;
@@ -85,7 +87,7 @@ public abstract class Command {
      */
     protected boolean accepts(@Nullable MyContact contact, String key, @Nullable MessageKey messageKey) {
         if (key.equals(getKey())) {
-            if ((messageKey == null || messageKey.fromMe()) || Bot.getPermissionManager().getRole(contact).i <= getPermissionLevel().i)
+            if ((messageKey == null || messageKey.fromMe()) || UntisBot.getPermissionManager().getRole(contact).i <= getPermissionLevel().i)
                 for (Target commandTarget : getCommandTargets()) {
                     if (commandTarget == Target.ALL) return true;
                     if (commandTarget == Target.CONSOLE && contact == null) return true;

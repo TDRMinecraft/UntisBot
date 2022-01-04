@@ -1,5 +1,11 @@
 package de.bentzin.bot.command;
 
+import de.bentzin.bot.MyContact;
+import de.bentzin.bot.UntisBot;
+import de.bentzin.bot.command.commands.HelpCommand;
+import de.bentzin.bot.command.commands.InfoCommand;
+import de.bentzin.bot.command.commands.SayCommand;
+import de.bentzin.bot.command.commands.TestCommand;
 import de.bentzin.facharbeit.bot.Bot;
 import de.bentzin.facharbeit.bot.MyContact;
 import de.bentzin.facharbeit.bot.command.commands.HelpCommand;
@@ -30,12 +36,12 @@ public class CommandSystem {
      */
     public static void registerAll() {
         System.out.println("registering Commands!");
-        Bot.getCommandsystem().registerCommand(new TestCommand());
-        Bot.getCommandsystem().registerCommand(new HelpCommand());
-        Bot.getCommandsystem().registerCommand(new SayCommand());
-        Bot.getCommandsystem().registerCommand(new InfoCommand());
+        UntisBot.getCommandsystem().registerCommand(new TestCommand());
+        UntisBot.getCommandsystem().registerCommand(new HelpCommand());
+        UntisBot.getCommandsystem().registerCommand(new SayCommand());
+        UntisBot.getCommandsystem().registerCommand(new InfoCommand());
 
-        System.out.println("registerd: " + Bot.getCommandsystem().commandSet);
+        System.out.println("registerd: " + UntisBot.getCommandsystem().commandSet);
     }
 
     /**
@@ -96,7 +102,7 @@ public class CommandSystem {
                     .title("Bot") // Set the title of the url
                     .description("Command \" " + key + "\" was not found!" + "\n" + "Type -help to see a list of available commands!") // Set the description of the url
                     .create();
-            Bot.getApi().sendMessage(messageInfo.chat().get(),
+            UntisBot.getApi().sendMessage(messageInfo.chat().get(),
                     message);
 
         } else

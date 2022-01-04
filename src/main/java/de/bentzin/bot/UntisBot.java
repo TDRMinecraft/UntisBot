@@ -68,7 +68,7 @@ public final class UntisBot {
      *
      * @throws ParseException the parse exception
      */
-    public Bot() throws ParseException {
+    public UntisBot() throws ParseException {
     }
 
     /**
