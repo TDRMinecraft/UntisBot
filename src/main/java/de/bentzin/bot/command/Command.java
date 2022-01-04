@@ -1,5 +1,6 @@
 package de.bentzin.bot.command;
 
+import de.bentzin.bot.permission.Role;
 import de.bentzin.facharbeit.bot.Bot;
 import de.bentzin.facharbeit.bot.MyContact;
 import de.bentzin.facharbeit.bot.permission.Role;
