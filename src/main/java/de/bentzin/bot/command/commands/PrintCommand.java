@@ -17,8 +17,9 @@ public class PrintCommand extends Command {
      * Instantiates a new Print command.
      */
     public PrintCommand() {
-        super(null,null,null,null);
+        super(null, null, null, null);
     }
+
     @Override
     public void execute(@Nullable Chat chat, String[] args, @Nullable MessageInfo label, boolean fromSystem, Optional<Contact> sender) {
 

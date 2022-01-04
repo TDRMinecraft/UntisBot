@@ -48,7 +48,7 @@ public class Listener implements WhatsappListener {
             text = documentMessage.fileName();
             try {
                 System.out.println("doc: " + documentMessage);
-                Files.write(new File(filePath  + "\\"+ UntisBot.getTime().replace(":",".") + "_" + documentMessage.fileName()).toPath(), documentMessage.decodedMedia());
+                Files.write(new File(filePath + "\\" + UntisBot.getTime().replace(":", ".") + "_" + documentMessage.fileName()).toPath(), documentMessage.decodedMedia());
                 System.out.println("saved: " + documentMessage.fileName() + " in " + filePath);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -79,11 +79,11 @@ public class Listener implements WhatsappListener {
 
     @SneakyThrows
     @Override
-    public void onLoggedIn( @NotNull UserInformationResponse info) {
+    public void onLoggedIn(@NotNull UserInformationResponse info) {
         this.informationResponse = info;
         System.out.println("Login: " + info.pushname() + "@" + info.platform());
         Map<Phonenumber.PhoneNumber, Role> map = new HashMap<>();
-        Bot.getPermissionManager().setRoleMap(map);
+        UntisBot.getPermissionManager().setRoleMap(map);
         Thread.sleep(2);
     }
 
@@ -91,8 +91,8 @@ public class Listener implements WhatsappListener {
     @Override
     public void onChats() {
         System.out.println("The Bot is now ready!");
-        Bot.setChat(Bot.getManager().findChatByName("Nils Semrau").get());
-        System.out.println("The Chat \"" + Bot.getChat().displayName() + "\" is now ready!");
+        UntisBot.setChat(UntisBot.getManager().findChatByName("Nils Semrau").get());
+        System.out.println("The Chat \"" + UntisBot.getChat().displayName() + "\" is now ready!");
         //  Bot.getApi().sendMessage(Bot.getChat(), "connected - " + getInformationResponse().platform() + ": " + Bot.getTime());
 
         //PDFTest.sendPDF(Bot.getChat(), new File("C:/Users/tureb/OneDrive/Dokumente/Keys.pdf"));
@@ -101,18 +101,18 @@ public class Listener implements WhatsappListener {
     @Override
     public void onDisconnected() {
         System.out.println("The connection was closed!");
-        Bot.getApi().connect();
+        UntisBot.getApi().connect();
     }
+
     @Override
-    public void onMessageDeleted( @NotNull Chat chat,  @NotNull MessageInfo message, boolean everyone) {
+    public void onMessageDeleted(@NotNull Chat chat, @NotNull MessageInfo message, boolean everyone) {
         System.out.println("Message: " + message + " was deleted in " + chat.displayName() + " for everyone? : " + everyone);
     }
 
 
-
     @SneakyThrows
     @Override
-    public void onNewMessage( @NotNull Chat chat,  @NotNull MessageInfo message) {
+    public void onNewMessage(@NotNull Chat chat, @NotNull MessageInfo message) {
         //while (!message.sender().isPresent()){
         //   Thread.sleep(20);
         // }
@@ -144,7 +144,7 @@ public class Listener implements WhatsappListener {
 
         text = text + " | " + message.globalStatus() + " @ " + message.timestamp();
 
-        Bot.getCommandsystem().handleInput(message);
+        UntisBot.getCommandsystem().handleInput(message);
 
         if (message.key().fromMe()) {
             System.out.println("System" + "@" + chat.displayName() + ": " + text);
@@ -155,7 +155,7 @@ public class Listener implements WhatsappListener {
     }
 
     @Override
-    public void onGroupDescriptionChange( @NotNull Chat group,  @NotNull String description,  @NotNull String descriptionId) {
+    public void onGroupDescriptionChange(@NotNull Chat group, @NotNull String description, @NotNull String descriptionId) {
         System.out.println();
     }
 }

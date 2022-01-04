@@ -80,8 +80,8 @@ public class CommandSystem {
                 if (command.accepts(MyContact.fromContact(messageInfo.sender()), key, messageInfo.key())) {
                     if (messageInfo.chat().isPresent()) {
                         command.input(messageInfo.container().textMessage().text());
-                        if(messageInfo.sender().get().chosenName() == null)
-                        System.out.println("[CMD]: \"" + "System" + "\" executed: " + key + "!");
+                        if (messageInfo.sender().get().chosenName() == null)
+                            System.out.println("[CMD]: \"" + "System" + "\" executed: " + key + "!");
                         else
                             System.out.println("[CMD]: \"" + messageInfo.sender().get().chosenName() + "\" executed: " + key + "!");
                         command.execute(messageInfo.chat().get(), args, messageInfo, messageInfo.key().fromMe(), messageInfo.sender());

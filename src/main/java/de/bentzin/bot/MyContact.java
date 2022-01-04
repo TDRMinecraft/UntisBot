@@ -5,7 +5,6 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import it.auties.whatsapp4j.protobuf.contact.Contact;
 import it.auties.whatsapp4j.protobuf.contact.ContactStatus;
-import lombok.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
