@@ -1,9 +1,9 @@
 package de.bentzin.bot.command.commands;
 
-import de.bentzin.facharbeit.bot.Bot;
-import de.bentzin.facharbeit.bot.command.Command;
-import de.bentzin.facharbeit.bot.command.Target;
-import de.bentzin.facharbeit.bot.permission.Role;
+import de.bentzin.bot.UntisBot;
+import de.bentzin.bot.command.Command;
+import de.bentzin.bot.command.Target;
+import de.bentzin.bot.permission.Role;
 import it.auties.whatsapp4j.protobuf.chat.Chat;
 import it.auties.whatsapp4j.protobuf.contact.Contact;
 import it.auties.whatsapp4j.protobuf.info.MessageInfo;
@@ -29,7 +29,7 @@ public class TestCommand extends Command {
         if (chat == null && label == null && sender == null) {
             System.out.println("Test successful " + Arrays.toString(args));
         } else {
-            Bot.getApi().sendMessage(chat, new TextMessage("Test successful " + Arrays.toString(args)), label);
+            UntisBot.getApi().sendMessage(chat, new TextMessage("Test successful " + Arrays.toString(args)), label);
         }
     }
 }
