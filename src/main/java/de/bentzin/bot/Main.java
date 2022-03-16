@@ -6,7 +6,7 @@ public class Main {
      * @param args 0: debugmode | boolean
      */
     public static void main(String[] args) {
-        UntisBot.init(false);
+        UntisBot.init();
         UntisBot.connect();
     }
 }

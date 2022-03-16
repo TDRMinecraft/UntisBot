@@ -68,7 +68,7 @@ public final class UntisBot {
     public UntisBot() throws ParseException {
     }
 
-    protected static void init(boolean debugmode) {
+    protected static void init() {
         registerEvents(api);
         getApi().connect();
         Runtime.getRuntime().addShutdownHook(new Thread(shutdownhook));
@@ -151,7 +151,6 @@ public final class UntisBot {
     /**
      * The entry point of Bot.
      *
-     * @param args the input arguments
      * @throws IOException          the io exception
      * @throws InterruptedException the interrupted exception
      */

@@ -19,7 +19,7 @@ public enum Target {
     /**
      * All target.
      */
-    ALL;
+    ALL(CONSOLE,GROUP,DIRECT);
 
     private final Target[] targets;
 

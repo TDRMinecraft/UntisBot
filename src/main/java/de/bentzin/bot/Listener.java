@@ -101,7 +101,9 @@ public class Listener implements WhatsappListener {
     @Override
     public void onDisconnected() {
         System.out.println("The connection was closed!");
+        if(UntisBot.AUTORESTART)
         UntisBot.getApi().connect();
+        System.exit(5);
     }
 
     @Override
@@ -137,7 +139,7 @@ public class Listener implements WhatsappListener {
             if (message.key().fromMe()) {
                 System.out.println("System send an unknown message to: " + chat.displayName());
             } else {
-                System.out.println("\"" + message.sender().get().name() + "\" " + "send an unknown message to: " + chat.displayName());
+                System.out.println("\"" + message.sender().get().name() + "\" " + "send an unknown message to: " + chat.displayName() + " | " + message.globalStatus());
                 return;
             }
 
