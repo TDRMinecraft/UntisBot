@@ -90,11 +90,11 @@ public class CommandSystem {
                 }
             }
             TextMessage message = TextMessage.newTextMessage() // Create a new text message builder
-                    .text("Command not found!") // Set the text to "A nice and complex message"
-                    .canonicalUrl("") // Set the url
-                    .matchedText("!")
-                    .title("Bot") // Set the title of the url
-                    .description("Command \" " + key + "\" was not found!" + "\n" + "Type -help to see a list of available commands!") // Set the description of the url
+                    .text("Command not found!") // Set the text to "Command not found!"
+                    .canonicalUrl("") // Set the url to "" - avoid redirect!!!
+                    .matchedText("!") // Set the text to a char so it will display properly
+                    .title("Bot") // Set the title of the url to Bot (looks like a sender)
+                    .description("Command \" " + key + "\" was not found!" + "\n" + "Type -help to see a list of available commands!") // Set the description to the "content"
                     .create();
             UntisBot.getApi().sendMessage(messageInfo.chat().get(),
                     message);
