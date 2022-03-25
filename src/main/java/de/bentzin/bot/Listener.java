@@ -103,6 +103,7 @@ public class Listener implements WhatsappListener {
         System.out.println("The connection was closed!");
         if(UntisBot.AUTORESTART)
         UntisBot.getApi().connect();
+        else
         System.exit(5);
     }
 
